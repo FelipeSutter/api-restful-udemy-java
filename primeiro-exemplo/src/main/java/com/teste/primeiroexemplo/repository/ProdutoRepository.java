@@ -7,6 +7,7 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Repository;
 
+import com.teste.primeiroexemplo.exception.ResourceNotFoundException;
 import com.teste.primeiroexemplo.model.Produto;
 
 @Repository
@@ -73,7 +74,7 @@ public class ProdutoRepository {
         // 1. Encontrar o produto na lista
         Optional<Produto> produtoEncontrado = obterPorId(produto.getId());
         if (produtoEncontrado.isEmpty()) {
-            throw new InputMismatchException("Produto não encontrado.");
+            throw new ResourceNotFoundException("Produto com o id passado não foi encontrado.");
         }
 
         // 2. Remover o antigo produto da lista
