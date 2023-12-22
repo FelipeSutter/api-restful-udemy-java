@@ -21,7 +21,7 @@ public class ProdutoService {
      * @return Lista de produtos.
      */
     public List<Produto> obterTodos() {
-        return repository.obterTodos();
+        return repository.findAll();
     }
 
     /**
@@ -31,7 +31,7 @@ public class ProdutoService {
      * @return retorna um produto caso seja encontrado. Optional
      */
     public Optional<Produto> obterPorId(Integer id) {
-        return repository.obterPorId(id);
+        return repository.findById(id);
     }
 
     /**
@@ -42,7 +42,7 @@ public class ProdutoService {
      */
     public Produto adicionar(Produto produto) {
         // Colocar regras de negócio aqui.
-        return repository.adicionar(produto);
+        return repository.save(produto);
     }
 
     /**
@@ -51,19 +51,22 @@ public class ProdutoService {
      * @param id que será deletado do banco
      */
     public void deletar(Integer id) {
-        repository.deletar(id);
+        Optional<Produto> produto = obterPorId(id);
+
+        repository.delete(produto.get());
+
     }
 
     /**
      * Método que atualiza o produto na lista
      * 
      * @param produto que será atualizado.
-     * @param id do produto específico que será atualizado.
+     * @param id      do produto específico que será atualizado.
      * @return retorna o produto após atualizá-lo dentro da lista.
      */
     public Produto atualizar(Integer id, Produto produto) {
         produto.setId(id);
-        return repository.atualizar(produto);
+        return repository.save(produto);
     }
 
 }
