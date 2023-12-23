@@ -7,7 +7,6 @@ import java.util.stream.Collectors;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.ui.ModelMap;
 
 import com.teste.primeiroexemplo.exception.ResourceNotFoundException;
 import com.teste.primeiroexemplo.model.Produto;
@@ -94,8 +93,9 @@ public class ProdutoService {
         // Verificar se o id existe
         Optional<Produto> produto = repository.findById(id);
 
-        if(produto.isEmpty()) {
-            throw new ResourceNotFoundException("Não foi possível deletar o produto com o id" + id + " pois ele não existe.")
+        if (produto.isEmpty()) {
+            throw new ResourceNotFoundException(
+                    "Não foi possível deletar o produto com o id " + id + " pois ele não existe.");
         }
 
         repository.deleteById(id);
@@ -110,6 +110,13 @@ public class ProdutoService {
      * @return retorna o produto após atualizá-lo dentro da lista.
      */
     public ProdutoDTO atualizar(Integer id, ProdutoDTO produtoDto) {
+
+        // Verificar se esse produto existe antes de atualizar
+        Optional<Produto> produtoExiste = repository.findById(id);
+        if (produtoExiste.isEmpty()) {
+            throw new ResourceNotFoundException(
+                    "Não foi possível atualizar o produto com o id " + id + " pois ele não existe.");
+        }
 
         // Passar o id para o dto
         produtoDto.setId(id);
