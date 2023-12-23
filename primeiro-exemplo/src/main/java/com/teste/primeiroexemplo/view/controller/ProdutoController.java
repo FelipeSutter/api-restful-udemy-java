@@ -17,9 +17,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.teste.primeiroexemplo.model.Produto;
 import com.teste.primeiroexemplo.service.ProdutoService;
 import com.teste.primeiroexemplo.shared.ProdutoDTO;
+import com.teste.primeiroexemplo.view.model.ProdutoRequest;
 import com.teste.primeiroexemplo.view.model.ProdutoResponse;
 
 @RestController
@@ -52,19 +52,37 @@ public class ProdutoController {
     }
 
     @PostMapping
-    public Produto adicionar(@RequestBody Produto produto) {
-        return service.adicionar(produto);
+    public ResponseEntity<ProdutoResponse> adicionar(@RequestBody ProdutoRequest produtoRequest) {
+
+        // Transforma o request em dto
+        ProdutoDTO dto = mapper.map(produtoRequest, ProdutoDTO.class);
+
+        // Salva o dto no banco
+        dto = service.adicionar(dto);
+
+        // Converte esse dto para response p/ exibir somente as informações necessárias
+        return new ResponseEntity<>(mapper.map(dto, ProdutoResponse.class), HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
-    public Produto atualizar(@RequestBody Produto produto, @PathVariable Integer id) {
-        return service.atualizar(id, produto);
+    public ResponseEntity<ProdutoResponse> atualizar(@RequestBody ProdutoRequest produtoRequest,
+            @PathVariable Integer id) {
+
+        // Mesma coisa que o atualizar, a diferença é o método que passa o id do
+        // produto.
+        ProdutoDTO dto = mapper.map(produtoRequest, ProdutoDTO.class);
+
+        dto = service.atualizar(id, dto);
+
+        return new ResponseEntity<>(
+                mapper.map(dto, ProdutoResponse.class),
+                HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
-    public String deletar(@PathVariable Integer id) {
+    public ResponseEntity<?> deletar(@PathVariable Integer id) {
         service.deletar(id);
-        return "Produto com o id: " + id + " foi deletado com sucesso!";
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
 }
