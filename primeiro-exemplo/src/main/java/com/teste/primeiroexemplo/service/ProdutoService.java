@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.ModelMap;
 
 import com.teste.primeiroexemplo.exception.ResourceNotFoundException;
 import com.teste.primeiroexemplo.model.Produto;
@@ -66,9 +67,22 @@ public class ProdutoService {
      * @param produto que será adicionado
      * @return Retorna um produto.
      */
-    public ProdutoDTO adicionar(ProdutoDTO produto) {
-        // Colocar regras de negócio aqui.
-        return repository.save(produto);
+    public ProdutoDTO adicionar(ProdutoDTO produtoDto) {
+
+        // Primeiro setta o id como nulo
+        produtoDto.setId(null);
+
+        // Declara e converte o produtoDto em um produto
+        ModelMapper mapper = new ModelMapper();
+        Produto produto = mapper.map(produtoDto, Produto.class);
+
+        // Salva o produto no banco de dados
+        produto = repository.save(produto);
+
+        // Pega o valor do id de produto e setta no produtoDto e retorna o dto
+        produtoDto.setId(produto.getId());
+
+        return produtoDto;
     }
 
     /**
@@ -77,9 +91,14 @@ public class ProdutoService {
      * @param id que será deletado do banco
      */
     public void deletar(Integer id) {
-        Optional<ProdutoDTO> produto = obterPorId(id);
+        // Verificar se o id existe
+        Optional<Produto> produto = repository.findById(id);
 
-        repository.delete(produto.get());
+        if(produto.isEmpty()) {
+            throw new ResourceNotFoundException("Não foi possível deletar o produto com o id" + id + " pois ele não existe.")
+        }
+
+        repository.deleteById(id);
 
     }
 
@@ -90,9 +109,19 @@ public class ProdutoService {
      * @param id      do produto específico que será atualizado.
      * @return retorna o produto após atualizá-lo dentro da lista.
      */
-    public ProdutoDTO atualizar(Integer id, ProdutoDTO produto) {
-        produto.setId(id);
-        return repository.save(produto);
+    public ProdutoDTO atualizar(Integer id, ProdutoDTO produtoDto) {
+
+        // Passar o id para o dto
+        produtoDto.setId(id);
+        // Criar um mapper
+        ModelMapper mapper = new ModelMapper();
+        // Converter o dto para entidade
+        Produto produto = mapper.map(produtoDto, Produto.class);
+        // Salvar o produto e retornar atualizado
+        produto = repository.save(produto);
+
+        return produtoDto;
+
     }
 
 }
