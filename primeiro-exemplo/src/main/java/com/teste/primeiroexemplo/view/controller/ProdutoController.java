@@ -1,4 +1,4 @@
-package com.teste.primeiroexemplo.controller;
+package com.teste.primeiroexemplo.view.controller;
 
 import java.util.List;
 import java.util.Optional;
@@ -19,7 +19,7 @@ import com.teste.primeiroexemplo.service.ProdutoService;
 @RestController
 @RequestMapping("/api/produtos")
 public class ProdutoController {
-    
+
     @Autowired
     private ProdutoService service;
 
