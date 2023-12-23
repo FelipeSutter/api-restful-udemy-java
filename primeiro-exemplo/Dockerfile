@@ -17,7 +17,7 @@ FROM openjdk:17-jdk-slim
 EXPOSE 8080
 
 # copia da build (nome dado lá em cima) o target onde está localizado o .jar da aplicação e coloca dentro de um arquivo
-COPY --from=build primeiro-exemplo/target/primeiro-exemplo-0.0.1-SNAPSHOT.jar app.jar
+COPY --from=build target/primeiro-exemplo-0.0.1-SNAPSHOT.jar app.jar
 
 # esses são os comandos que serão executados dentro do docker após os comandos anteriores
 ENTRYPOINT [ "java", "-jar", "app.jar" ]
