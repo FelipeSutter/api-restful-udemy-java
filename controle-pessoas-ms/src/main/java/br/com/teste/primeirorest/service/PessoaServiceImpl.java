@@ -8,14 +8,20 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import br.com.teste.primeirorest.compartilhado.AnimalDto;
 import br.com.teste.primeirorest.compartilhado.PessoaDto;
+import br.com.teste.primeirorest.http.AnimaisFeignClient;
 import br.com.teste.primeirorest.model.Pessoa;
 import br.com.teste.primeirorest.repository.PessoaRepository;
 
 @Service
 public class PessoaServiceImpl implements PessoaService {
+
     @Autowired
     private PessoaRepository repo;
+
+    @Autowired
+    private AnimaisFeignClient animalClient;
 
     @Override
     public PessoaDto criarPessoa(PessoaDto pessoa) {
@@ -38,6 +44,10 @@ public class PessoaServiceImpl implements PessoaService {
         if (pessoa.isPresent()) {
 
             PessoaDto dto = new ModelMapper().map(pessoa.get(), PessoaDto.class);
+
+            // Pega todos os animais pelo id do dono e setta dentro da pessoaDto
+            List<AnimalDto> animais = animalClient.obterAnimais(id);
+            dto.setAnimais(animais);
 
             return Optional.of(dto);
         }

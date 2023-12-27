@@ -1,9 +1,9 @@
 package br.com.teste.primeirorest.view.model;
 
 public class PessoaModeloResponse {
-    private Integer id;
-    private String nome;
-    private String sobrenome;
+    protected Integer id;
+    protected String nome;
+    protected String sobrenome;
 
     // #region Get / Set
     public Integer getId() {

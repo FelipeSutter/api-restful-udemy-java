@@ -1,9 +1,20 @@
 package br.com.teste.primeirorest.compartilhado;
 
+import java.util.List;
+
 public class PessoaDto {
     private Integer id;
     private String nome;
     private String sobrenome;
+    private List<AnimalDto> animais;
+
+    public List<AnimalDto> getAnimais() {
+        return animais;
+    }
+
+    public void setAnimais(List<AnimalDto> animais) {
+        this.animais = animais;
+    }
 
     // #region Get / Set
     public Integer getId() {
