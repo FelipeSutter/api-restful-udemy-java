@@ -14,7 +14,7 @@ public class Animal {
     private String nome;
     private Integer idade;
     private String raca;
-    private Boolean vivo;
+    private Boolean vivo = true;
 
     public Animal() {
         setVivo(true);

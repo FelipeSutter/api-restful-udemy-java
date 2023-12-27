@@ -26,18 +26,16 @@ import br.com.teste.primeirorest.service.PessoaService;
 import br.com.teste.primeirorest.view.model.PessoaModeloRequest;
 import br.com.teste.primeirorest.view.model.PessoaModeloResponse;
 
-
 @RestController
 @RequestMapping("/api/pessoas")
 public class PessoaController {
     @Autowired
     private PessoaService service;
 
-    @GetMapping(value="/status")
+    @GetMapping(value = "/status")
     public String statusServico(@Value("${local.server.port}") String porta) {
         return String.format("Serviço ativo e executando na porta %s", porta);
     }
-    
 
     @PostMapping
     public ResponseEntity<PessoaModeloResponse> criarPessoa(@RequestBody @Valid PessoaModeloRequest pessoa) {
@@ -46,40 +44,39 @@ public class PessoaController {
         dto = service.criarPessoa(dto);
         return new ResponseEntity<>(mapper.map(dto, PessoaModeloResponse.class), HttpStatus.CREATED);
     }
-    
+
     @GetMapping
     public ResponseEntity<List<PessoaModeloResponse>> obterTodos() {
         List<PessoaDto> dtos = service.obterTodos();
 
-        if(dtos.isEmpty()){
+        if (dtos.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
 
         ModelMapper mapper = new ModelMapper();
         List<PessoaModeloResponse> resp = dtos.stream()
-                    .map(dto -> mapper.map(dto, PessoaModeloResponse.class))
-                    .collect(Collectors.toList());
+                .map(dto -> mapper.map(dto, PessoaModeloResponse.class))
+                .collect(Collectors.toList());
 
         return new ResponseEntity<>(resp, HttpStatus.OK);
     }
-    
-    @GetMapping(value="/{id}")
-    public ResponseEntity<PessoaModeloResponse> obterPorId(@PathVariable String id) {
+
+    @GetMapping(value = "/{id}")
+    public ResponseEntity<PessoaModeloResponse> obterPorId(@PathVariable Integer id) {
         Optional<PessoaDto> pessoa = service.obterPorId(id);
 
-        if(pessoa.isPresent()) {
+        if (pessoa.isPresent()) {
             return new ResponseEntity<>(
-                new ModelMapper().map(pessoa.get(), PessoaModeloResponse.class), 
-                HttpStatus.OK
-            );
+                    new ModelMapper().map(pessoa.get(), PessoaModeloResponse.class),
+                    HttpStatus.OK);
         }
 
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
-    @PutMapping(value="/{id}")
-    public ResponseEntity<PessoaModeloResponse> atualizarPessoa(@PathVariable String id,
-        @Valid @RequestBody Pessoa pessoa) {
+    @PutMapping(value = "/{id}")
+    public ResponseEntity<PessoaModeloResponse> atualizarPessoa(@PathVariable Integer id,
+            @Valid @RequestBody Pessoa pessoa) {
         ModelMapper mapper = new ModelMapper();
         PessoaDto dto = mapper.map(pessoa, PessoaDto.class);
         dto = service.atualizarPessoa(id, dto);
@@ -87,9 +84,9 @@ public class PessoaController {
         return new ResponseEntity<>(mapper.map(dto, PessoaModeloResponse.class), HttpStatus.OK);
     }
 
-    @DeleteMapping(value="/{id}")
-    public ResponseEntity<Void> removerPessoa(@PathVariable String id) {
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<Void> removerPessoa(@PathVariable Integer id) {
         service.removerPessoa(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-    } 
+    }
 }

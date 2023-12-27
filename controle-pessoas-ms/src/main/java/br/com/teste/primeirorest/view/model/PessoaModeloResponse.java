@@ -1,16 +1,16 @@
 package br.com.teste.primeirorest.view.model;
 
 public class PessoaModeloResponse {
-    private String id;
+    private Integer id;
     private String nome;
     private String sobrenome;
 
-    //#region Get / Set
-    public String getId() {
+    // #region Get / Set
+    public Integer getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -29,7 +29,7 @@ public class PessoaModeloResponse {
     public void setSobrenome(String sobrenome) {
         this.sobrenome = sobrenome;
     }
-    //#endregion
+    // #endregion
 
     public String getNomeCompleto() {
         return String.format("%s %s", nome, sobrenome);

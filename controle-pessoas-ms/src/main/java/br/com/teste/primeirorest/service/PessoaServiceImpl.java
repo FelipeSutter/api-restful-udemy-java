@@ -27,31 +27,31 @@ public class PessoaServiceImpl implements PessoaService {
         List<Pessoa> pessoas = repo.findAll();
 
         return pessoas.stream()
-            .map(pessoa -> new ModelMapper().map(pessoa, PessoaDto.class))
-            .collect(Collectors.toList());
+                .map(pessoa -> new ModelMapper().map(pessoa, PessoaDto.class))
+                .collect(Collectors.toList());
     }
 
     @Override
-    public Optional<PessoaDto> obterPorId(String id) {
-       Optional<Pessoa> pessoa = repo.findById(id);
+    public Optional<PessoaDto> obterPorId(Integer id) {
+        Optional<Pessoa> pessoa = repo.findById(id);
 
-       if(pessoa.isPresent()) {
+        if (pessoa.isPresent()) {
 
             PessoaDto dto = new ModelMapper().map(pessoa.get(), PessoaDto.class);
 
             return Optional.of(dto);
-       }
+        }
 
-       return Optional.empty();
+        return Optional.empty();
     }
 
     @Override
-    public void removerPessoa(String id) {
+    public void removerPessoa(Integer id) {
         repo.deleteById(id);
     }
 
     @Override
-    public PessoaDto atualizarPessoa(String id, PessoaDto pessoa) {
+    public PessoaDto atualizarPessoa(Integer id, PessoaDto pessoa) {
         pessoa.setId(id);
         return salvarPessoa(pessoa);
     }
