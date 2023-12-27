@@ -1,4 +1,4 @@
-package com.microsservices.zuulservice;
+package com.meuexemplo.zuulservice;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
