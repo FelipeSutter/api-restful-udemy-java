@@ -16,7 +16,7 @@ public class Produto {
 
     private String nome;
 
-    private String observação;
+    private String observacao;
 
     private Date dataCadastro = new Date();
 
@@ -26,7 +26,9 @@ public class Produto {
 
     private Double desconto;
 
-    private Double acréscimo;
+    private Double acrescimo;
+
+    private Double valorTotal;
 
     public Integer getId() {
         return id;
@@ -44,12 +46,12 @@ public class Produto {
         this.nome = nome;
     }
 
-    public String getObservação() {
-        return observação;
+    public String getObservacao() {
+        return observacao;
     }
 
-    public void setObservação(String observação) {
-        this.observação = observação;
+    public void setObservacao(String observacao) {
+        this.observacao = observacao;
     }
 
     public Date getDataCadastro() {
@@ -84,12 +86,20 @@ public class Produto {
         this.desconto = desconto;
     }
 
-    public Double getAcréscimo() {
-        return acréscimo;
+    public Double getAcrescimo() {
+        return acrescimo;
     }
 
-    public void setAcréscimo(Double acréscimo) {
-        this.acréscimo = acréscimo;
+    public void setAcrescimo(Double acrescimo) {
+        this.acrescimo = acrescimo;
+    }
+
+    public Double getValorTotal() {
+        return valorTotal;
+    }
+
+    public void setValorTotal(Double valorTotal) {
+        this.valorTotal = valorTotal;
     }
 
     // TODO: Método que retorna o valor total calculado, com desconto ou acréscimo
