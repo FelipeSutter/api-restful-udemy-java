@@ -30,6 +30,19 @@ public class Produto {
 
     private Double valorTotal;
 
+    public Produto(Integer id, String nome, String observacao, Date dataCadastro, Double valor, Integer quantidade,
+            Double desconto, Double acrescimo) {
+        this.id = id;
+        this.nome = nome;
+        this.observacao = observacao;
+        this.dataCadastro = dataCadastro;
+        this.valor = valor;
+        this.quantidade = quantidade;
+        this.desconto = desconto;
+        this.acrescimo = acrescimo;
+        this.valorTotal = (valor + (valor * acrescimo / 100) - (valor * desconto / 100)) * quantidade;
+    }
+
     public Integer getId() {
         return id;
     }
@@ -101,7 +114,5 @@ public class Produto {
     public void setValorTotal(Double valorTotal) {
         this.valorTotal = valorTotal;
     }
-
-    // TODO: Método que retorna o valor total calculado, com desconto ou acréscimo
 
 }
