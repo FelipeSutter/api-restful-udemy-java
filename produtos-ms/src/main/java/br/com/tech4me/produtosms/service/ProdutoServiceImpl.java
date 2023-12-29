@@ -59,11 +59,12 @@ public class ProdutoServiceImpl implements ProdutoService {
     }
 
     private ProdutoDto salvarProduto(ProdutoDto produto) {
-        ModelMapper mapper = new ModelMapper();
-        Produto produtoEntidade = mapper.map(produto, Produto.class);
+        Produto produtoEntidade = new Produto(produto.getId(), produto.getNome(), produto.getObservacao(),
+                produto.getValor(), produto.getQuantidade(), produto.getDesconto(), produto.getAcrescimo());
+
         produtoEntidade = repository.save(produtoEntidade);
 
-        return mapper.map(produtoEntidade, ProdutoDto.class);
+        return new ModelMapper().map(produtoEntidade, ProdutoDto.class);
     }
 
 }
