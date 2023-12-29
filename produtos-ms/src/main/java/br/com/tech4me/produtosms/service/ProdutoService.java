@@ -15,6 +15,6 @@ public interface ProdutoService {
 
     void deletarProduto(Integer id);
 
-    ProdutoDto atualizaProduto(Integer id, ProdutoDto produto);
+    ProdutoDto atualizarProduto(Integer id, ProdutoDto produto);
 
 }

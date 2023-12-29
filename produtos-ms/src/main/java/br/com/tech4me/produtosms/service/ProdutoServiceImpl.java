@@ -53,7 +53,7 @@ public class ProdutoServiceImpl implements ProdutoService {
     }
 
     @Override
-    public ProdutoDto atualizaProduto(Integer id, ProdutoDto produto) {
+    public ProdutoDto atualizarProduto(Integer id, ProdutoDto produto) {
         produto.setId(id);
         return salvarProduto(produto);
     }

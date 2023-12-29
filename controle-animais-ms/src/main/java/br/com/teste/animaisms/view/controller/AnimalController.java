@@ -39,9 +39,9 @@ public class AnimalController {
     }
 
     @PostMapping
-    public ResponseEntity<AnimalModeloResponse> criarAnimal(@RequestBody @Valid AnimalModeloInclusao Animal) {
+    public ResponseEntity<AnimalModeloResponse> criarAnimal(@RequestBody @Valid AnimalModeloInclusao animal) {
         ModelMapper mapper = new ModelMapper();
-        AnimalDto dto = mapper.map(Animal, AnimalDto.class);
+        AnimalDto dto = mapper.map(animal, AnimalDto.class);
         dto = service.criarAnimal(dto);
         return new ResponseEntity<>(mapper.map(dto, AnimalModeloResponse.class), HttpStatus.CREATED);
     }
@@ -93,9 +93,9 @@ public class AnimalController {
 
     @PutMapping(value = "/{id}")
     public ResponseEntity<AnimalModeloResponse> atualizarAnimal(@PathVariable Integer id,
-            @Valid @RequestBody AnimalModeloAlteracao Animal) {
+            @Valid @RequestBody AnimalModeloAlteracao animal) {
         ModelMapper mapper = new ModelMapper();
-        AnimalDto dto = mapper.map(Animal, AnimalDto.class);
+        AnimalDto dto = mapper.map(animal, AnimalDto.class);
         dto = service.atualizarAnimal(id, dto);
 
         return new ResponseEntity<>(mapper.map(dto, AnimalModeloResponse.class), HttpStatus.OK);
