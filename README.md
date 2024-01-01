@@ -5,3 +5,5 @@ Os projetos que entrarão nesse repositório são desse curso: <a href="https://
 Neste projeto você encontrará diferentes arquiteturas, como APIRest, Microsservices e até uma parte de testes de software!
 
 <h2>Separação de pastas</h2>
+
+<p>Dentro do repositório há pastas separando cada projeto, como por exemplo: APIRestuful, Testes, Microsservices, entre outros.</p>
