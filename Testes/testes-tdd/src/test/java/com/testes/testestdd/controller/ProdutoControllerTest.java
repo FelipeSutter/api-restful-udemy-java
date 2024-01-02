@@ -11,11 +11,13 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.testes.testestdd.model.Produto;
 import com.testes.testestdd.service.ProdutoService;
 
@@ -70,7 +72,35 @@ public class ProdutoControllerTest {
         when(this.service.obterPorId(1)).thenReturn(optProduto);
 
         // Act
-        this.mockMvc.perform(requestBuilder).andExpect(MockMvcResultMatchers.jsonPath("$.id").value(1)); // esse método
+        this.mockMvc.perform(requestBuilder).andExpect(MockMvcResultMatchers.jsonPath("$.id")
+                .value(1)); // esse método
+        // envia a
+        // requisição
+        // Assert
+    }
+
+    @Test
+    public void deve_adicionar_o_produto() throws Exception {
+        // Arrange
+        Produto produto = new Produto();
+        produto.setNome("Martelo");
+        produto.setQuantidade(10);
+
+        // Transforma o objeto em um json, e todo valor que estiver dentro dele ficará
+        // na estrutura de um json
+        String json = new ObjectMapper().writeValueAsString(produto);
+
+        var requestBuilder = MockMvcRequestBuilders.post("/api/produtos")
+                .content(json)
+                .contentType(MediaType.APPLICATION_JSON); // criando a requisição
+
+        // setta o id depois de fazer o post
+        produto.setId(1);
+
+        when(this.service.adicionar(produto)).thenReturn(produto);
+
+        // Act
+        this.mockMvc.perform(requestBuilder).andExpect(MockMvcResultMatchers.status().isCreated()); // esse método
         // envia a
         // requisição
         // Assert
