@@ -2,7 +2,6 @@ package com.api.gestaodeprojetos.security;
 
 import java.io.IOException;
 import java.util.Collections;
-import java.util.InputMismatchException;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,23 +39,23 @@ public class JWTAuthenticationFilter extends OncePerRequestFilter {
         // Pega o id do usuário dentro do token
         Optional<Long> id = jwtService.obterIdDoUsuario(token);
 
-        if (!id.isPresent()) {
-            throw new InputMismatchException("Token inválido.");
+        if (id.isPresent()) {
+
+            // Pega o usuario dono do id.
+            UserDetails usuario = userDetails.obterUsuarioPorId(id.get());
+
+            // Verificando se o user tá autenticado ou não
+            UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(usuario, null,
+                    Collections.emptyList());
+
+            // Passa a autenticação pro request e setta a autenticação pro security,
+            // retirando a autenticação padrão e colocando a nossa autenticação
+            auth.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+
+            SecurityContextHolder.getContext().setAuthentication(auth);
         }
-
-        // Pega o usuario dono do id.
-        UserDetails usuario = userDetails.obterUsuarioPorId(id.get());
-
-        // Verificando se o user tá autenticado ou não
-        UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(usuario, null,
-                Collections.emptyList());
-
-        // Passa a autenticação pro request e setta a autenticação pro security,
-        // retirando a autenticação padrão e colocando a nossa autenticação
-        auth.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
-
-        SecurityContextHolder.getContext().setAuthentication(auth);
-
+        // Método padrão para filtrar o usuario.
+        filterChain.doFilter(request, response);
     }
 
     private String getToken(HttpServletRequest request) {

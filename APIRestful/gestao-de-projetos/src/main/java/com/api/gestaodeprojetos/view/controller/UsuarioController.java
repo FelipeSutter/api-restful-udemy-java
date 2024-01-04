@@ -4,8 +4,6 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,26 +23,26 @@ import com.api.gestaodeprojetos.view.model.LoginResponse;
 public class UsuarioController {
 
     @Autowired
-    private UsuarioService service;
+    private UsuarioService servicoUsuario;
 
     @GetMapping
-    public ResponseEntity<List<Usuario>> obterTodos() {
-        return new ResponseEntity<>(service.obterTodos(), HttpStatus.OK);
+    public List<Usuario> obterTodos() {
+        return servicoUsuario.obterTodos();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Optional<Usuario>> obterPorId(@PathVariable Long id) {
-        return new ResponseEntity<>(service.obterPorId(id), HttpStatus.OK);
+    public Optional<Usuario> obter(@PathVariable("id") long id) {
+        return servicoUsuario.obterPorId(id);
     }
 
     @PostMapping
-    public ResponseEntity<Usuario> adicionar(@RequestBody Usuario usuario) {
-        return new ResponseEntity<>(service.adicionar(usuario), HttpStatus.CREATED);
+    public Usuario adicionar(@RequestBody Usuario usuario) {
+        return servicoUsuario.adicionar(usuario);
     }
 
     @PostMapping("/login")
-    public ResponseEntity<LoginResponse> login(@RequestBody LoginRequest request) {
-        return new ResponseEntity<>(service.logar(request.getEmail(), request.getSenha()), HttpStatus.CREATED);
+    public LoginResponse login(@RequestBody LoginRequest request) {
+        return servicoUsuario.logar(request.getEmail(), request.getSenha());
     }
 
 }

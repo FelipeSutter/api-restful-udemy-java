@@ -10,22 +10,22 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import com.api.gestaodeprojetos.model.Usuario;
-import com.api.gestaodeprojetos.service.UsuarioService;
+import com.api.gestaodeprojetos.repository.UsuarioRepository;
 
 @Service
 public class CustomUserDetailsService implements UserDetailsService {
 
     @Autowired
-    private UsuarioService service;
+    private UsuarioRepository repository;
 
     @Override
     public UserDetails loadUserByUsername(String email) {
-        Usuario usuario = getUser(() -> service.obterPorEmail(email));
+        Usuario usuario = getUser(() -> repository.findByEmail(email));
         return usuario;
     }
 
     public UserDetails obterUsuarioPorId(Long id) {
-        Usuario usuario = getUser(() -> service.obterPorId(id));
+        Usuario usuario = getUser(() -> repository.findById(id));
         return usuario;
     }
 

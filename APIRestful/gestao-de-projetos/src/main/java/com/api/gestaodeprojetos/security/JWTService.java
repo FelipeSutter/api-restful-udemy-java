@@ -34,7 +34,7 @@ public class JWTService {
                 .setSubject(usuario.getId().toString())
                 .setIssuedAt(new Date())
                 .setExpiration(dataExpiracao)
-                .signWith(SignatureAlgorithm.ES256, chaveJWT)
+                .signWith(SignatureAlgorithm.HS512, chaveJWT)
                 .compact();
     }
 
