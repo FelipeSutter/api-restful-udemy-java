@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.api</groupId>
-	<artifactId>gestaodeprojetos</artifactId>
+	<artifactId>gestao-de-projetos</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>gestaodeprojetos</name>
+	<name>gestao-de-projetos</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>
 		<java.version>11</java.version>

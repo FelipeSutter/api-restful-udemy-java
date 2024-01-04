@@ -66,20 +66,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
-                .authorizeRequests()
+                .authorizeRequests(authorizeRequests -> authorizeRequests
+                        .antMatchers(HttpMethod.POST, "/api/usuarios", "/api/usuarios/login").permitAll()
+                        .anyRequest().authenticated());
 
-                /*
-                 * Daqui pra baixo é onde nos vamos futucar e fazer nossas validações.
-                 * Aqui vamos informar as rotas que não vão precisar de autenticação.
-                 */
-                .antMatchers(HttpMethod.POST, "/api/usuarios", "/api/usuarios/login")
-                .permitAll() // informa que todos podem acessar, não precisa de autenticação.
-
-                .anyRequest()
-                .authenticated();// Digo que as demais requisições devem ser autenticadas.
-
-        // Aqui eu informo que antes de qualter requisição http, o sistema deve usar o
-        // nosso filtro jwtAuthenticationFilter.
         http.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
     }
 }
