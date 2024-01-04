@@ -14,6 +14,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+// A classe WebSecurityConfigurerAdapter já está obsoleta, por isso os métodos estão com erros
+
 @Configuration
 @EnableWebSecurity // Aqui informo que é uma classe de segurança do WebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
