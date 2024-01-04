@@ -3,8 +3,6 @@ package com.api.gestaodeprojetos.security;
 import java.util.Date;
 import java.util.Optional;
 
-import javax.swing.text.html.Option;
-
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
 
