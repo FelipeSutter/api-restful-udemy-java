@@ -6,4 +6,4 @@ Neste projeto você encontrará diferentes arquiteturas, como APIRest, Microsser
 
 <h2>Separação de pastas</h2>
 
-<p>Dentro do repositório há pastas separando cada projeto, como por exemplo: <b>APIRestuful</b>, <b>Testes</b>, <b>Microsservices</b>, entre outros.</p>
+<p>Dentro do repositório há pastas separando cada projeto, como por exemplo: <b>APIRestuful</b>, <b>Testes</b>, <b>Microsservices</b>, entre outros. Também tem o primeiro-exemplo, uma APIRestful inicial que conta com deploy no Render feito por Docker</p>
