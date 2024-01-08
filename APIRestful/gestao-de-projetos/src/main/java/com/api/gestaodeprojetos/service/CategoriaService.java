@@ -28,7 +28,7 @@ public class CategoriaService {
     }
 
     public Categoria atualizar(Long id, Categoria categoria) {
-        // categoria.setId(id);
+        categoria.setId(id);
         return repository.save(categoria);
     }
 

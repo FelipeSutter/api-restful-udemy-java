@@ -38,7 +38,7 @@ public class CategoriaController {
         return service.adicionar(categoria);
     }
 
-    @PutMapping
+    @PutMapping("/{id}")
     public Categoria atualizar(@PathVariable Long id, @RequestBody Categoria categoria) {
         // categoria.setId(id);
         return service.atualizar(id, categoria);

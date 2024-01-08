@@ -38,7 +38,7 @@ public class EventoController {
         return service.adicionar(evento);
     }
 
-    @PutMapping
+    @PutMapping("/{id}")
     public Evento atualizar(@PathVariable Long id, @RequestBody Evento evento) {
         // evento.setId(id);
         return service.atualizar(id, evento);
