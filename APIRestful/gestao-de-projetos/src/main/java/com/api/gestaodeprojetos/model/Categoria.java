@@ -9,7 +9,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
@@ -23,7 +22,7 @@ public class Categoria {
     private String descricao;
 
     @OneToMany(mappedBy = "categoria")
-    @JsonBackReference
+    @JsonManagedReference
     private List<Evento> eventos;
 
     public Long getId() {

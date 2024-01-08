@@ -11,7 +11,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 public class Evento {
@@ -27,7 +26,7 @@ public class Evento {
 
     @ManyToOne
     @JoinColumn(name = "categoria_id")
-    @JsonManagedReference
+    @JsonBackReference
     private Categoria categoria;
 
     public Long getId() {
