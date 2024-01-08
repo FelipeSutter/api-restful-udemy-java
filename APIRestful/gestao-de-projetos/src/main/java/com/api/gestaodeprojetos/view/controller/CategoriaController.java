@@ -34,7 +34,7 @@ public class CategoriaController {
     }
 
     @PostMapping
-    public Categoria adicionar(Categoria categoria) {
+    public Categoria adicionar(@RequestBody Categoria categoria) {
         return service.adicionar(categoria);
     }
 

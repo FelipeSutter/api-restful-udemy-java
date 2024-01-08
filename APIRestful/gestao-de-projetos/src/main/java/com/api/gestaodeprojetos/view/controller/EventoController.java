@@ -34,7 +34,7 @@ public class EventoController {
     }
 
     @PostMapping
-    public Evento adicionar(Evento evento) {
+    public Evento adicionar(@RequestBody Evento evento) {
         return service.adicionar(evento);
     }
 
