@@ -13,34 +13,34 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.api.gestaodeprojetos.model.Categoria;
-import com.api.gestaodeprojetos.service.CategoriaService;
+import com.api.gestaodeprojetos.model.Avaliacao;
+import com.api.gestaodeprojetos.service.AvaliacaoService;
 
 @RestController
-@RequestMapping("/api/categorias")
-public class CategoriaController {
+@RequestMapping("/api/avaliacoes")
+public class AvaliacaoController {
 
     @Autowired
-    private CategoriaService service;
+    private AvaliacaoService service;
 
     @GetMapping
-    public List<Categoria> obterTodos() {
+    public List<Avaliacao> obterTodos() {
         return service.obterTodos();
     }
 
     @GetMapping("/{id}")
-    public Optional<Categoria> obterPorId(@PathVariable Long id) {
+    public Optional<Avaliacao> obterPorId(@PathVariable Long id) {
         return service.obterPorId(id);
     }
 
     @PostMapping
-    public Categoria adicionar(@RequestBody Categoria categoria) {
-        return service.adicionar(categoria);
+    public Avaliacao adicionar(@RequestBody Avaliacao avaliacao) {
+        return service.adicionar(avaliacao);
     }
 
     @PutMapping("/{id}")
-    public Categoria atualizar(@PathVariable Long id, @RequestBody Categoria categoria) {
-        return service.atualizar(id, categoria);
+    public Avaliacao atualizar(@PathVariable Long id, @RequestBody Avaliacao avaliacao) {
+        return service.atualizar(id, avaliacao);
     }
 
     @DeleteMapping("/{id}")

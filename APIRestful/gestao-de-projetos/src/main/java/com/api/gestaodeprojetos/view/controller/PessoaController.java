@@ -13,34 +13,34 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.api.gestaodeprojetos.model.Categoria;
-import com.api.gestaodeprojetos.service.CategoriaService;
+import com.api.gestaodeprojetos.model.Pessoa;
+import com.api.gestaodeprojetos.service.PessoaService;
 
 @RestController
-@RequestMapping("/api/categorias")
-public class CategoriaController {
+@RequestMapping("/api/pessoas")
+public class PessoaController {
 
     @Autowired
-    private CategoriaService service;
+    private PessoaService service;
 
     @GetMapping
-    public List<Categoria> obterTodos() {
+    public List<Pessoa> obterTodos() {
         return service.obterTodos();
     }
 
     @GetMapping("/{id}")
-    public Optional<Categoria> obterPorId(@PathVariable Long id) {
+    public Optional<Pessoa> obterPorId(@PathVariable Long id) {
         return service.obterPorId(id);
     }
 
     @PostMapping
-    public Categoria adicionar(@RequestBody Categoria categoria) {
-        return service.adicionar(categoria);
+    public Pessoa adicionar(@RequestBody Pessoa pessoa) {
+        return service.adicionar(pessoa);
     }
 
     @PutMapping("/{id}")
-    public Categoria atualizar(@PathVariable Long id, @RequestBody Categoria categoria) {
-        return service.atualizar(id, categoria);
+    public Pessoa atualizar(@PathVariable Long id, @RequestBody Pessoa pessoa) {
+        return service.atualizar(id, pessoa);
     }
 
     @DeleteMapping("/{id}")
