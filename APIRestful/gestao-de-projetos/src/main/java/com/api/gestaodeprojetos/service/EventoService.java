@@ -32,4 +32,8 @@ public class EventoService {
         return repository.save(evento);
     }
 
+    public void deletar(Long id) {
+        repository.deleteById(id);
+    }
+
 }
