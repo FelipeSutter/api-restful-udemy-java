@@ -7,6 +7,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 public class Pessoa {
 
@@ -18,6 +20,7 @@ public class Pessoa {
     private String nome;
 
     @OneToOne(mappedBy = "pessoa")
+    @JsonBackReference
     private Avaliacao avaliacao;
 
     public Long getId() {

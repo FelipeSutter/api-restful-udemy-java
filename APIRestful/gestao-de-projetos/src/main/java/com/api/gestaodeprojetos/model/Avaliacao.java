@@ -8,6 +8,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 public class Avaliacao {
 
@@ -20,6 +22,7 @@ public class Avaliacao {
 
     @OneToOne
     @JoinColumn(name = "pessoa_id")
+    @JsonManagedReference
     private Pessoa pessoa;
 
     public Long getId() {
