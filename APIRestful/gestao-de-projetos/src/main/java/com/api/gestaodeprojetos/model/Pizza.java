@@ -11,8 +11,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-
 @Entity
 public class Pizza {
 
@@ -25,7 +23,6 @@ public class Pizza {
 
     @ManyToMany
     @JoinTable(name = "pizza_ingrediente", joinColumns = @JoinColumn(name = "pizza_id"), inverseJoinColumns = @JoinColumn(name = "ingrediente_id"))
-    @JsonManagedReference
     private List<Ingrediente> ingredientes;
 
     public Long getId() {
