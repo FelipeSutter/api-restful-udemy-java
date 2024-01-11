@@ -10,4 +10,4 @@ Neste projeto você encontrará diferentes arquiteturas, como APIRest, Microsser
 
 <h2>API Restful</h2>
 
-<p>Um dos conteúdos abordado no curso é a criação de API's Restful utilizando o Java Spring.</p>
+<p>Um dos conteúdos abordado no curso é a criação de API's Restful utilizando o Java Spring. Foi ensinado o conceito de MVC, as camadas Model, Repository, Service e Controllers, além da parte de testes mais a frente do curso.</p>
