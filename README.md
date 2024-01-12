@@ -15,3 +15,7 @@ Neste projeto você encontrará diferentes arquiteturas, como APIRest, Microsser
 <h2>Microsservicos</h2>
 
 <p>Outro assunto abordado foi o conceito de Microsserviços durante o curso. Conceito de Gateway, funcionando como um controlador principal, e também um Discovery Service, funcionando como um registrador de todas as outras API's</p>
+
+<h2>Testes</h2>
+
+<p>Foi mostrado conceitos de testes de software, como testes de carga, testes unitários, etc. E fora ensinado testes unitários com JUnit e Mockito para validação dos testes.</p>
