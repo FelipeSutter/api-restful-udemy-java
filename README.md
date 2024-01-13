@@ -19,3 +19,8 @@ Neste projeto você encontrará diferentes arquiteturas, como APIRest, Microsser
 <h2>Testes</h2>
 
 <p>Foi mostrado conceitos de testes de software, como testes de carga, testes unitários, etc. E fora ensinado testes unitários com JUnit e Mockito para validação dos testes.</p>
+
+<h2>Arquitetura</h2>
+
+<p>Aqui se encontram algumas fotos png para exemplificar a arquitetura de API Rest e API com Microsservices.</p>
+
